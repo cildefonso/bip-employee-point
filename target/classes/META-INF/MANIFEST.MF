@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: bip-employee
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: cilde
+Implementation-Vendor-Id: com.bip
+Build-Jdk: 1.8.0_261
+Implementation-URL: http://projects.spring.io/spring-boot/bip-employee
+ /
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
