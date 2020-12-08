@@ -1,0 +1,53 @@
+#https://gist.github.com/guioconnor/66a04a2c4292b8dcba22808fbc7fd68e
+#https://circleci.com/docs/2.0/migrating-from-travis/?utm_medium=SEM&utm_source=gnb&utm_campaign=SEM-gnb-DSA-Eng-ni&utm_content=&utm_term=dynamicSearch-&gclid=Cj0KCQjw-O35BRDVARIsAJU5mQWvU5nDA67-G-xNXTGu46xrfFQ_yvFW5In-EMFcehQMb4BkhXUal6oaAoUDEALw_wcB
+
+services:
+- mongodb
+
+before_script:
+ - sleep 15
+ - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+  
+
+
+script:
+- echo "skipping tests"
+
+
+dist: trusty
+
+
+language: java
+sudo: true
+sudo: required
+jdk:
+- oraclejdk9
+addons:
+  apt:
+    packages:
+      - oracle-java9-installer
+before_install:
+  - chmod +x mvnw
+  
+addons:
+  sonarcloud:
+    organization: "sonarcloud_organization_key" # the key of the org you chose at step #3
+    token: 
+        secure: "d6188a6e016ac038ee6c03206b679be6535508b3"
+        
+       
+deploy:
+  provider: codedeploy
+  access_key_id: "YOUR AWS ACCESS KEY"
+  secret_access_key: "YOUR AWS SECRET KEY"
+  bucket: "S3 Bucket"
+  key: latest/MyApp.zip
+  bundle_type: zip
+  application: MyApp
+  deployment_group: MyDeploymentGroup
+  region: us-west-1
+   
+notifications:
+  email:
+    - cildefonso@gmail.com, deleon.simoni@gmail.com
+ 
